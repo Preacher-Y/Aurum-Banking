@@ -6,7 +6,9 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 // FORMAT DATE TIME
-export const formatDateTime = (dateString: Date) => {
+export const formatDateTime = (input: string | Date) => {
+  const date = input instanceof Date ? input : new Date(input);
+
   const dateTimeOptions: Intl.DateTimeFormatOptions = {
     weekday: "short", // abbreviated weekday name (e.g., 'Mon')
     month: "short", // abbreviated month name (e.g., 'Oct')
@@ -35,22 +37,22 @@ export const formatDateTime = (dateString: Date) => {
     hour12: true, // use 12-hour clock (true) or 24-hour clock (false)
   };
 
-  const formattedDateTime: string = new Date(dateString).toLocaleString(
+  const formattedDateTime: string = date.toLocaleString(
     "en-US",
     dateTimeOptions
   );
 
-  const formattedDateDay: string = new Date(dateString).toLocaleString(
+  const formattedDateDay: string = date.toLocaleString(
     "en-US",
     dateDayOptions
   );
 
-  const formattedDate: string = new Date(dateString).toLocaleString(
+  const formattedDate: string = date.toLocaleString(
     "en-US",
     dateOptions
   );
 
-  const formattedTime: string = new Date(dateString).toLocaleString(
+  const formattedTime: string = date.toLocaleString(
     "en-US",
     timeOptions
   );
@@ -90,7 +92,9 @@ export function formUrlQuery({ params, key, value }: UrlQueryParams) {
 
   currentUrl.set(key, value);
 
-  return `${window.location.pathname}?${currentUrl.toString()}`;
+  const pathname = typeof window === "undefined" ? "" : window.location.pathname;
+
+  return `${pathname}?${currentUrl.toString()}`;
 }
 
 export function getAccountTypeColors(type: AccountTypes) {
@@ -131,7 +135,7 @@ export function countTransactionCategories(
   transactions?.forEach(({ category }) => {
 
       // If the category exists in the categoryCounts object, increment its count
-      if (categoryCounts.hasOwnProperty(category)) {
+      if (Object.hasOwn(categoryCounts, category)) {
         categoryCounts[category]++;
       } else {
         // Otherwise, initialize the count to 1
@@ -161,12 +165,26 @@ export function extractCustomerIdFromUrl(url: string) {
   return url.split("/").at(-1);
 }
 
-export function encryptId(id: string) {
-  return btoa(id);
+export function encodeId(id: string) {
+  if (typeof Buffer !== "undefined") {
+    return Buffer.from(id, "utf8").toString("base64");
+  }
+
+  const bytes = new TextEncoder().encode(id);
+  const binary = Array.from(bytes, (byte) => String.fromCharCode(byte)).join("");
+
+  return btoa(binary);
 }
 
-export function decryptId(id: string) {
-  return atob(id);
+export function decodeId(id: string) {
+  if (typeof Buffer !== "undefined") {
+    return Buffer.from(id, "base64").toString("utf8");
+  }
+
+  const binary = atob(id);
+  const bytes = Uint8Array.from(binary, (char) => char.charCodeAt(0));
+
+  return new TextDecoder().decode(bytes);
 }
 
 export const getTransactionStatus = (date: Date) => {

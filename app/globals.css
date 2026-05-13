@@ -286,6 +286,10 @@
   color: var(--aurum-cream-text);
 }
 
+.aurum-field:has(input:focus-visible) {
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--aurum-gold) 72%, transparent);
+}
+
 .aurum-email-field {
   top: 47px;
 }

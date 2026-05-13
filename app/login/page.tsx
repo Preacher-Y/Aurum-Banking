@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { KeyRound, Mail } from "lucide-react";
 
 export default function LoginPage() {
@@ -29,7 +30,7 @@ export default function LoginPage() {
         <section className="aurum-brand" aria-label="Aurum">
           <Image
             src="/icons/Aurum-logo.svg"
-            alt=""
+            alt="Aurum company logo"
             width={244}
             height={257}
             priority
@@ -49,7 +50,7 @@ export default function LoginPage() {
             <Mail aria-hidden="true" className="aurum-field-icon" />
             <input
               aria-label="Email"
-              autoComplete="off"
+              autoComplete="email"
               inputMode="email"
               placeholder="Email"
               type="email"
@@ -60,7 +61,7 @@ export default function LoginPage() {
             <KeyRound aria-hidden="true" className="aurum-field-icon" />
             <input
               aria-label="Password"
-              autoComplete="new-password"
+              autoComplete="current-password"
               placeholder="Password"
               type="password"
             />
@@ -71,7 +72,7 @@ export default function LoginPage() {
           </button>
 
           <p className="aurum-signup-copy">
-            Don&apos;t Have An Account? <a href="#signup">Sign Up</a>
+            Don&apos;t Have An Account? <Link href="/signup">Sign Up</Link>
           </p>
         </form>
       </div>
