@@ -4,6 +4,40 @@
 
 @custom-variant dark (&:is(.dark *));
 
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+.glassmorphism {
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 3px;
+  height: 3px;
+  border-radius: 2px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #dddddd;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #5c5c7b;
+  border-radius: 50px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #7878a3;
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -126,5 +160,388 @@
   }
   html {
     @apply font-sans;
+  }
+}
+
+.aurum-login-page {
+  --aurum-black: #14120e;
+  --aurum-panel-black: #1a1712;
+  --aurum-cream: #eee7d7;
+  --aurum-cream-text: #ede5d9;
+  --aurum-gold: #ca9340;
+
+  position: relative;
+  flex: 1;
+  min-height: 100svh;
+  overflow: hidden;
+  background: var(--aurum-black);
+  color: var(--aurum-cream-text);
+  font-family: var(--font-libertinus-serif-display), Georgia, serif;
+}
+
+.aurum-login-stage {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 1024px;
+  height: 662px;
+  overflow: hidden;
+  transform: translate(-50%, -50%)
+    scale(min(calc(100vw / 1024px), calc(100svh / 662px), 1.65));
+  transform-origin: center;
+}
+
+.aurum-background {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.aurum-background-primary {
+  position: absolute;
+  top: -154px;
+  left: -27px;
+  width: 1061px;
+  height: 970px;
+  max-width: none;
+}
+
+.aurum-background-ring-shell {
+  position: absolute;
+  top: -522px;
+  left: -360px;
+  display: flex;
+  width: 1745px;
+  height: 1745px;
+  align-items: center;
+  justify-content: center;
+}
+
+.aurum-background-ring {
+  width: 1239px;
+  height: 1239px;
+  max-width: none;
+  transform: rotate(-39.9deg);
+}
+
+.aurum-brand {
+  position: absolute;
+  top: 139px;
+  left: 50%;
+  z-index: 2;
+  display: flex;
+  width: 118px;
+  transform: translateX(-50%);
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  pointer-events: none;
+}
+
+.aurum-brand-mark {
+  width: 60px;
+  height: auto;
+}
+
+.aurum-brand p {
+  margin-top: 3px;
+  color: #ead9c2;
+  font-size: 21px;
+  line-height: 1;
+  letter-spacing: 1.9px;
+}
+
+.aurum-login-form {
+  position: absolute;
+  top: 219px;
+  left: 341px;
+  z-index: 2;
+  width: 337px;
+  height: 294px;
+}
+
+.aurum-form-shell {
+  position: absolute;
+  top: 27px;
+  left: 0;
+  width: 337.19px;
+  height: 230.52px;
+  background: var(--aurum-cream);
+  clip-path: path(
+    "M0 19.96C0 7.62 13.05 -1.8 25.21 0.29C57.42 5.84 111.09 9.48 171.85 9.48C230.3 9.48 282.19 6.11 314.72 0.92C326.05 -0.89 337.19 7.67 337.19 19.14V150.35L337.18 150.87C336.59 194.88 261.04 230.52 168.59 230.52C75.78 230.52 0 194.61 0 150.35V19.96Z"
+  );
+}
+
+.aurum-field {
+  position: absolute;
+  left: 29px;
+  z-index: 1;
+  display: flex;
+  width: 280px;
+  height: 46px;
+  align-items: center;
+  overflow: hidden;
+  border-radius: 8px;
+  background: var(--aurum-panel-black);
+  color: var(--aurum-cream-text);
+}
+
+.aurum-field:has(input:focus-visible) {
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--aurum-gold) 72%, transparent);
+}
+
+.aurum-email-field {
+  top: 47px;
+}
+
+.aurum-password-field {
+  top: 108px;
+}
+
+.aurum-field-icon {
+  position: absolute;
+  left: 13px;
+  width: 24px;
+  height: 24px;
+  color: #a98b00;
+  stroke-width: 1.9px;
+}
+
+.aurum-field input {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  background: transparent;
+  padding: 0 18px 1px 47px;
+  color: var(--aurum-cream-text);
+  font-family: inherit;
+  font-size: 19px;
+  line-height: 1;
+  letter-spacing: 1.7px;
+  outline: none;
+  caret-color: #dcb96e;
+}
+
+.aurum-field input::placeholder {
+  color: var(--aurum-cream-text);
+  opacity: 1;
+}
+
+.aurum-field input:-webkit-autofill,
+.aurum-field input:-webkit-autofill:hover,
+.aurum-field input:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 1000px var(--aurum-panel-black) inset;
+  -webkit-text-fill-color: var(--aurum-cream-text);
+  caret-color: #dcb96e;
+  transition: background-color 9999s ease-in-out 0s;
+}
+
+.aurum-login-button {
+  position: absolute;
+  top: 182px;
+  left: 67px;
+  z-index: 1;
+  width: 203px;
+  height: 40px;
+  border: 0;
+  border-radius: 8px;
+  background: linear-gradient(
+    90deg,
+    #a3853f 0%,
+    #dcb96e 49.52%,
+    #86642b 100%
+  );
+  color: var(--aurum-panel-black);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 21px;
+  line-height: 1;
+  letter-spacing: 1.9px;
+  transition:
+    filter 150ms ease,
+    transform 150ms ease;
+}
+
+.aurum-login-button:hover {
+  filter: brightness(1.05);
+}
+
+.aurum-login-button:active {
+  transform: translateY(1px);
+}
+
+.aurum-signup-copy {
+  position: absolute;
+  top: 273px;
+  left: 50%;
+  width: max-content;
+  transform: translateX(-50%);
+  color: var(--aurum-cream-text);
+  font-size: 14.2px;
+  line-height: 1;
+  letter-spacing: 0.7px;
+  text-align: center;
+}
+
+.aurum-signup-copy a {
+  color: var(--aurum-gold);
+  text-decoration: underline;
+  text-underline-offset: 1px;
+}
+
+@media (max-width: 900px) {
+  .aurum-login-stage {
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100svh;
+    transform: none;
+  }
+
+  .aurum-background-primary {
+    top: -122px;
+    left: 50%;
+    width: 980px;
+    height: auto;
+    transform: translateX(-50%);
+  }
+
+  .aurum-background-ring-shell {
+    top: -520px;
+    left: 50%;
+    width: 1420px;
+    height: 1420px;
+    transform: translateX(-50%);
+  }
+
+  .aurum-background-ring {
+    width: 1010px;
+    height: 1010px;
+  }
+
+  .aurum-brand {
+    top: clamp(96px, 13svh, 148px);
+  }
+
+  .aurum-brand-mark {
+    width: 64px;
+  }
+
+  .aurum-brand p {
+    font-size: 22px;
+  }
+
+  .aurum-login-form {
+    top: clamp(300px, 36svh, 380px);
+    left: 50%;
+    transform: translateX(-50%) scale(1.15);
+    transform-origin: top center;
+  }
+}
+
+@media (max-width: 640px) {
+  .aurum-background-primary {
+    top: -70px;
+    width: 820px;
+  }
+
+  .aurum-background-ring-shell {
+    top: -428px;
+    width: 1180px;
+    height: 1180px;
+  }
+
+  .aurum-background-ring {
+    width: 840px;
+    height: 840px;
+  }
+
+  .aurum-brand {
+    top: clamp(70px, 13svh, 112px);
+  }
+
+  .aurum-brand-mark {
+    width: clamp(54px, 16vw, 64px);
+  }
+
+  .aurum-brand p {
+    font-size: clamp(18px, 5.4vw, 21px);
+  }
+
+  .aurum-login-form {
+    top: clamp(214px, 37svh, 316px);
+    transform: translateX(-50%);
+  }
+}
+
+@media (max-width: 380px) {
+  .aurum-brand {
+    top: clamp(58px, 12svh, 92px);
+  }
+
+  .aurum-login-form {
+    top: clamp(198px, 36svh, 286px);
+    transform: translateX(-50%) scale(0.92);
+  }
+}
+
+@media (max-width: 340px) {
+  .aurum-login-form {
+    transform: translateX(-50%) scale(0.84);
+  }
+
+  .aurum-brand-mark {
+    width: 50px;
+  }
+}
+
+@media (max-height: 520px) and (orientation: landscape) {
+  .aurum-login-stage {
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100svh;
+    transform: none;
+  }
+
+  .aurum-background-primary {
+    top: -190px;
+    left: 50%;
+    width: 900px;
+    height: auto;
+    transform: translateX(-50%);
+  }
+
+  .aurum-background-ring-shell {
+    top: -600px;
+    left: 50%;
+    width: 1320px;
+    height: 1320px;
+    transform: translateX(-50%);
+  }
+
+  .aurum-background-ring {
+    width: 940px;
+    height: 940px;
+  }
+
+  .aurum-brand {
+    top: 18px;
+  }
+
+  .aurum-brand-mark {
+    width: 48px;
+  }
+
+  .aurum-brand p {
+    font-size: 17px;
+    letter-spacing: 1.4px;
+  }
+
+  .aurum-login-form {
+    top: 94px;
+    left: 50%;
+    transform: translateX(-50%) scale(0.86);
+    transform-origin: top center;
   }
 }
