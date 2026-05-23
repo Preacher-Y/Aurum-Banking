@@ -7,12 +7,11 @@
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
-
-/* Hide scrollbar for IE, Edge and Firefox */
 .no-scrollbar {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
+
 .glassmorphism {
   background: rgba(255, 255, 255, 0.25);
   backdrop-filter: blur(4px);
@@ -24,16 +23,13 @@
   height: 3px;
   border-radius: 2px;
 }
-
 .custom-scrollbar::-webkit-scrollbar-track {
   background: #dddddd;
 }
-
 .custom-scrollbar::-webkit-scrollbar-thumb {
   background: #5c5c7b;
   border-radius: 50px;
 }
-
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
   background: #7878a3;
 }
@@ -163,218 +159,146 @@
   }
 }
 
-.aurum-login-page {
-  --aurum-panel-black: #1a1712;
-  --aurum-cream-text: #ede5d9;
-  --aurum-gold: #ca9340;
+/* ── Aurum Auth Design System ──────────────────────────── */
+
+.aurum-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  border: 1px solid rgba(220, 185, 110, 0.28);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(220, 185, 110, 0.78);
 }
 
-.aurum-login-stage {
-  transform: translate(-50%, -50%)
-    scale(min(calc(100vw / 1024px), calc(100svh / 662px)));
+/* Double-bezel input — outer shell */
+.aurum-input-shell {
+  padding: 1px;
+  border-radius: 13px;
+  background: rgba(220, 185, 110, 0.05);
+  border: 1px solid rgba(220, 185, 110, 0.1);
+  transition:
+    border-color 0.5s cubic-bezier(0.32, 0.72, 0, 1),
+    background 0.5s cubic-bezier(0.32, 0.72, 0, 1);
 }
 
-.aurum-background-primary {
-  position: absolute;
-  top: -154px;
-  left: -27px;
-  width: 1061px;
-  height: 970px;
-  max-width: none;
+.aurum-input-shell:focus-within {
+  border-color: rgba(220, 185, 110, 0.38);
+  background: rgba(220, 185, 110, 0.04);
 }
 
-.aurum-background-ring-shell {
-  position: absolute;
-  top: -522px;
-  left: -360px;
-  width: 1745px;
-  height: 1745px;
+/* Double-bezel input — inner core */
+.aurum-input-core {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: #1a1712;
+  border-radius: 12px;
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.03);
+  overflow: hidden;
 }
 
-.aurum-background-ring {
-  width: 1239px;
-  height: 1239px;
-  max-width: none;
-  transform: rotate(-39.9deg);
+.aurum-input {
+  width: 100%;
+  height: 52px;
+  background: transparent;
+  border: 0;
+  padding: 0 18px 0 48px;
+  font-size: 14.5px;
+  letter-spacing: 0.6px;
+  color: #ede5d9;
+  caret-color: #dcb96e;
+  outline: none;
+  font-family: inherit;
 }
 
-.aurum-form-shell {
-  position: absolute;
-  top: 27px;
-  left: 0;
-  width: 337.19px;
-  height: 230.52px;
-  background: #2E2921;
-
-  clip-path: path(
-    "M0 19.96C0 7.62 13.05 -1.8 25.21 0.29C57.42 5.84 111.09 9.48 171.85 9.48C230.3 9.48 282.19 6.11 314.72 0.92C326.05 -0.89 337.19 7.67 337.19 19.14V150.35L337.18 150.87C336.59 194.88 261.04 230.52 168.59 230.52C75.78 230.52 0 194.61 0 150.35V19.96Z"
-  );
-
-  isolation: isolate;
+.aurum-input::placeholder {
+  color: #6b5847;
 }
 
-.aurum-field:has(input:focus-visible) {
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--aurum-gold) 72%, transparent);
-}
-
-.aurum-field input:-webkit-autofill,
-.aurum-field input:-webkit-autofill:hover,
-.aurum-field input:-webkit-autofill:focus {
-  -webkit-box-shadow: 0 0 0 1000px var(--aurum-panel-black) inset;
-  -webkit-text-fill-color: var(--aurum-cream-text);
+.aurum-input:-webkit-autofill,
+.aurum-input:-webkit-autofill:hover,
+.aurum-input:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 1000px #1a1712 inset;
+  -webkit-text-fill-color: #ede5d9;
   caret-color: #dcb96e;
   transition: background-color 9999s ease-in-out 0s;
 }
 
-@media (max-width: 900px) {
-  .aurum-login-stage {
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100svh;
-    transform: none;
-  }
+/* CTA button — pill with nested icon circle */
+/* Use w-full on the element itself when full-width is needed */
+.aurum-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px 5px 5px 24px;
+  border-radius: 9999px;
+  background: linear-gradient(135deg, #a3853f 0%, #dcb96e 55%, #86642b 100%);
+  color: #120e09;
+  border: 0;
+  cursor: pointer;
+  transition:
+    filter 0.5s cubic-bezier(0.32, 0.72, 0, 1),
+    transform 0.3s cubic-bezier(0.32, 0.72, 0, 1);
+}
 
-  .aurum-background-primary {
-    top: -122px;
-    left: 50%;
-    width: 980px;
-    height: auto;
-    transform: translateX(-50%);
-  }
+.aurum-cta-btn:hover {
+  filter: brightness(1.09);
+}
 
-  .aurum-background-ring-shell {
-    top: -520px;
-    left: 50%;
-    width: 1420px;
-    height: 1420px;
-    transform: translateX(-50%);
-  }
+.aurum-cta-btn:active {
+  transform: scale(0.98);
+}
 
-  .aurum-background-ring {
-    width: 1010px;
-    height: 1010px;
-  }
+.aurum-cta-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 9999px;
+  background: rgba(18, 14, 9, 0.18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: transform 0.5s cubic-bezier(0.32, 0.72, 0, 1);
+}
 
-  .aurum-brand {
-    top: clamp(96px, 13svh, 148px);
-  }
+.aurum-cta-btn:hover .aurum-cta-icon {
+  transform: translateX(3px) translateY(-1px) scale(1.07);
+}
 
-  .aurum-brand p {
-    font-size: 22px;
+/* Entry animations */
+@keyframes aurumFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+    filter: blur(3px);
   }
-
-  .aurum-login-form {
-    top: clamp(300px, 36svh, 380px);
-    left: 50%;
-    transform: translateX(-50%) scale(1.15);
-    transform-origin: top center;
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
   }
 }
 
-@media (max-width: 640px) {
-  .aurum-background-primary {
-    top: -70px;
-    width: 820px;
+@keyframes aurumSlideRight {
+  from {
+    opacity: 0;
+    transform: translateX(-18px);
   }
-
-  .aurum-background-ring-shell {
-    top: -428px;
-    width: 1180px;
-    height: 1180px;
-  }
-
-  .aurum-background-ring {
-    width: 840px;
-    height: 840px;
-  }
-
-  .aurum-brand {
-    top: clamp(70px, 13svh, 112px);
-  }
-
-  .aurum-brand-mark {
-    width: clamp(54px, 16vw, 64px);
-  }
-
-  .aurum-brand p {
-    font-size: clamp(18px, 5.4vw, 21px);
-  }
-
-  .aurum-login-form {
-    top: clamp(214px, 37svh, 316px);
-    transform: translateX(-50%);
+  to {
+    opacity: 1;
+    transform: translateX(0);
   }
 }
 
-@media (max-width: 380px) {
-  .aurum-brand {
-    top: clamp(58px, 12svh, 92px);
-  }
-
-  .aurum-login-form {
-    top: clamp(198px, 36svh, 286px);
-    transform: translateX(-50%) scale(0.92);
-  }
+.aurum-panel-animate {
+  opacity: 0;
+  animation: aurumSlideRight 0.9s cubic-bezier(0.32, 0.72, 0, 1) forwards;
 }
 
-@media (max-width: 340px) {
-  .aurum-login-form {
-    transform: translateX(-50%) scale(0.84);
-  }
-
-  .aurum-brand-mark {
-    width: 50px;
-  }
-}
-
-@media (max-height: 520px) and (orientation: landscape) {
-  .aurum-login-stage {
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100svh;
-    transform: none;
-  }
-
-  .aurum-background-primary {
-    top: -190px;
-    left: 50%;
-    width: 900px;
-    height: auto;
-    transform: translateX(-50%);
-  }
-
-  .aurum-background-ring-shell {
-    top: -600px;
-    left: 50%;
-    width: 1320px;
-    height: 1320px;
-    transform: translateX(-50%);
-  }
-
-  .aurum-background-ring {
-    width: 940px;
-    height: 940px;
-  }
-
-  .aurum-brand {
-    top: 18px;
-  }
-
-  .aurum-brand-mark {
-    width: 48px;
-  }
-
-  .aurum-brand p {
-    font-size: 17px;
-    letter-spacing: 1.4px;
-  }
-
-  .aurum-login-form {
-    top: 94px;
-    left: 50%;
-    transform: translateX(-50%) scale(0.86);
-    transform-origin: top center;
-  }
+.aurum-form-animate {
+  opacity: 0;
+  animation: aurumFadeUp 0.9s cubic-bezier(0.32, 0.72, 0, 1) forwards;
 }

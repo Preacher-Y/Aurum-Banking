@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-export default function LoginPage() {
+export default function SignUpPage() {
   return (
     <main className="min-h-[100dvh] flex font-[family-name:var(--font-libertinus-serif-display)] bg-[#0d0b08] text-[#ede5d9]">
 
@@ -11,7 +11,7 @@ export default function LoginPage() {
         aria-label="Aurum branding"
       >
         <div className="pointer-events-none absolute -top-48 -left-48 w-[560px] h-[560px] rounded-full bg-[#dcb96e] opacity-[0.05] blur-[130px]" aria-hidden="true" />
-        <div className="pointer-events-none absolute -bottom-40 -right-24 w-[380px] h-[380px] rounded-full bg-[#a3853f] opacity-[0.03] blur-[110px]" aria-hidden="true" />
+        <div className="pointer-events-none absolute bottom-0 right-0 w-[420px] h-[420px] rounded-full bg-[#86642b] opacity-[0.03] blur-[120px]" aria-hidden="true" />
 
         <div className="relative z-10 flex items-center gap-3.5 aurum-panel-animate" style={{ animationDelay: "0ms" }}>
           <Image src="/icons/Aurum-logo.svg" alt="" width={38} height={40} aria-hidden="true" />
@@ -19,21 +19,21 @@ export default function LoginPage() {
         </div>
 
         <div className="relative z-10 aurum-panel-animate" style={{ animationDelay: "100ms" }}>
-          <div className="aurum-eyebrow mb-8">Private Banking</div>
+          <div className="aurum-eyebrow mb-8">Welcome to Aurum</div>
           <h1 className="text-[52px] font-normal leading-[1.07] text-[#ede5d9] mb-6">
-            Where Wealth<br />Meets<br />Precision.
+            Begin Your<br />Private<br />Journey.
           </h1>
           <div className="w-10 h-px bg-gradient-to-r from-[#dcb96e] to-transparent mb-7" />
           <p className="text-[15px] leading-relaxed text-[#8c7d6e] max-w-[270px] tracking-wide">
-            Institutional-grade private banking for those who demand more from their financial partner.
+            Open your private account in minutes. Join a community of discerning investors who trust Aurum.
           </p>
         </div>
 
         <div className="relative z-10 space-y-5 aurum-panel-animate" style={{ animationDelay: "200ms" }}>
           {[
-            "Bank-grade encryption & multi-layer security",
-            "Real-time portfolio intelligence & analytics",
-            "Dedicated private wealth advisor on call",
+            "Zero account setup fees, ever",
+            "Full FDIC insured deposits up to $250k",
+            "24/7 concierge banking support",
           ].map((item, i) => (
             <div key={i} className="flex items-start gap-3">
               <span className="mt-[7px] w-1 h-1 rounded-full bg-[#dcb96e] shrink-0 block" />
@@ -54,17 +54,27 @@ export default function LoginPage() {
 
         <div className="relative z-10 w-full max-w-[380px]">
           <div className="aurum-form-animate" style={{ animationDelay: "60ms" }}>
-            <div className="aurum-eyebrow mb-5">Member Portal</div>
+            <div className="aurum-eyebrow mb-5">Create Account</div>
             <h2 className="text-[38px] font-normal leading-[1.1] text-[#ede5d9] mb-2">
-              Welcome back.
+              Join Aurum.
             </h2>
             <p className="text-[15px] tracking-[0.3px] text-[#8a7a6a] mb-10">
-              Sign in to your private account
+              Set up your private account today
             </p>
           </div>
 
-          <form autoComplete="off" aria-label="Login form">
+          <form autoComplete="off" aria-label="Sign up form">
             <div className="space-y-3 aurum-form-animate" style={{ animationDelay: "140ms" }}>
+              <div className="aurum-input-shell">
+                <div className="aurum-input-core">
+                  <svg className="absolute left-4 text-[#dcb96e] opacity-50 shrink-0" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <circle cx="12" cy="8" r="5" />
+                    <path d="M20 21a8 8 0 0 0-16 0" />
+                  </svg>
+                  <input aria-label="Full name" autoComplete="name" className="aurum-input" placeholder="Full name" type="text" />
+                </div>
+              </div>
+
               <div className="aurum-input-shell">
                 <div className="aurum-input-core">
                   <svg className="absolute left-4 text-[#dcb96e] opacity-50 shrink-0" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -81,20 +91,23 @@ export default function LoginPage() {
                     <rect width="18" height="11" x="3" y="11" rx="2" ry="2" />
                     <path d="M7 11V7a5 5 0 0 1 10 0v4" />
                   </svg>
-                  <input aria-label="Password" autoComplete="current-password" className="aurum-input" placeholder="Password" type="password" />
+                  <input aria-label="Password" autoComplete="new-password" className="aurum-input" placeholder="Password" type="password" />
+                </div>
+              </div>
+
+              <div className="aurum-input-shell">
+                <div className="aurum-input-core">
+                  <svg className="absolute left-4 text-[#dcb96e] opacity-50 shrink-0" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                  </svg>
+                  <input aria-label="Confirm password" autoComplete="new-password" className="aurum-input" placeholder="Confirm password" type="password" />
                 </div>
               </div>
             </div>
 
-            <div className="flex justify-end mt-3 mb-5 aurum-form-animate" style={{ animationDelay: "180ms" }}>
-              <Link className="text-[13px] tracking-[0.4px] text-[#ca9340] hover:text-[#dcb96e] transition-colors duration-500" href="/forgot-password">
-                Forgot password?
-              </Link>
-            </div>
-
-            <div className="aurum-form-animate" style={{ animationDelay: "220ms" }}>
+            <div className="mt-6 aurum-form-animate" style={{ animationDelay: "220ms" }}>
               <button className="aurum-cta-btn w-full" type="submit">
-                <span className="tracking-[2.5px] uppercase text-[14px]">Sign In</span>
+                <span className="tracking-[2.5px] uppercase text-[14px]">Create Account</span>
                 <span className="aurum-cta-icon">
                   <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                     <path d="M5 12h14M12 5l7 7-7 7" />
@@ -111,9 +124,9 @@ export default function LoginPage() {
               <div className="flex-1 h-px bg-[rgba(220,185,110,0.07)]" />
             </div>
             <p className="text-center text-[14px] tracking-[0.3px] text-[#7a6a58]">
-              Don&apos;t have an account?{" "}
-              <Link className="text-[#ca9340] hover:text-[#dcb96e] underline underline-offset-2 transition-colors duration-500" href="/signup">
-                Create account
+              Already have an account?{" "}
+              <Link className="text-[#ca9340] hover:text-[#dcb96e] underline underline-offset-2 transition-colors duration-500" href="/login">
+                Sign in
               </Link>
             </p>
           </div>
