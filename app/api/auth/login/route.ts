@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { AppwriteException } from "node-appwrite";
 import { createAdminClient } from "@/lib/appwrite";
 
 export async function POST(req: Request) {
@@ -22,11 +23,16 @@ export async function POST(req: Request) {
     await account.createEmailToken({ userId: session.userId, email });
 
     return NextResponse.json({ success: true, userId: session.userId });
-  } catch {
-    // Generic message — never reveal whether the email exists
+  } catch (err) {
+    // Auth/credential failures → 401
+    if (err instanceof AppwriteException && (err.code === 401 || err.code === 404)) {
+      return NextResponse.json({ error: "Invalid email or password." }, { status: 401 });
+    }
+    // Everything else is a server-side failure
+    console.error("[login]", err);
     return NextResponse.json(
-      { error: "Invalid email or password." },
-      { status: 401 }
+      { error: "Something went wrong. Please try again." },
+      { status: 500 }
     );
   }
 }

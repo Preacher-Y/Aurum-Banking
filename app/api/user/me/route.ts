@@ -9,7 +9,13 @@ export async function GET() {
     const { databases } = createAdminClient();
     const doc = await databases.getDocument(DATABASE_ID, USER_COLLECTION_ID, user.$id);
 
-    return NextResponse.json(doc);
+    // Return only fields the onboarding page needs — never expose PII like nationalId
+    return NextResponse.json({
+      $id: doc.$id,
+      firstName: doc.firstName as string,
+      lastName: doc.lastName as string,
+      onboardingComplete: doc.onboardingComplete as boolean,
+    });
   } catch {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }

@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { Client, Account } from "node-appwrite";
+import { AppwriteException } from "node-appwrite";
 import { createAdminClient, APPWRITE_COOKIE, DATABASE_ID, USER_COLLECTION_ID } from "@/lib/appwrite";
 
 export async function POST(req: Request) {
@@ -18,24 +18,13 @@ export async function POST(req: Request) {
     // Verify OTP — creates the real authenticated session
     const session = await account.createSession({ userId, secret: code });
 
-    // Build a scoped client from the session secret to issue a JWT
-    const sessionClient = new Client()
-      .setEndpoint(process.env.NEXT_PUBLIC_APPWRITE_ENDPOINT!)
-      .setProject(process.env.NEXT_PUBLIC_APPWRITE_PROJECT_ID!)
-      .setSession(session.secret);
-
-    const jwt = await new Account(sessionClient).createJWT();
-
     // Check onboarding status to decide where the client should redirect
     const userDoc = await databases.getDocument(DATABASE_ID, USER_COLLECTION_ID, userId);
     const redirectTo = userDoc.onboardingComplete ? "/dashboard" : "/onboarding";
 
-    const response = NextResponse.json({
-      success: true,
-      jwt: jwt.jwt,
-      redirectTo,
-    });
+    const response = NextResponse.json({ success: true, redirectTo });
 
+    // JWT is not needed client-side — session cookie is sufficient for all server routes
     response.cookies.set(APPWRITE_COOKIE, session.secret, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
@@ -45,10 +34,17 @@ export async function POST(req: Request) {
     });
 
     return response;
-  } catch {
+  } catch (err) {
+    if (err instanceof AppwriteException && err.code === 401) {
+      return NextResponse.json(
+        { error: "Invalid or expired code. Please try again." },
+        { status: 401 }
+      );
+    }
+    console.error("[otp/verify]", err);
     return NextResponse.json(
-      { error: "Invalid or expired code. Please try again." },
-      { status: 401 }
+      { error: "Something went wrong. Please try again." },
+      { status: 500 }
     );
   }
 }

@@ -10,7 +10,8 @@ const MONTHS = [
   "July", "August", "September", "October", "November", "December",
 ];
 const DAYS = Array.from({ length: 31 }, (_, i) => String(i + 1).padStart(2, "0"));
-const YEARS = Array.from({ length: 90 }, (_, i) => 2006 - i);
+const MIN_AGE = 18;
+const YEARS = Array.from({ length: 90 }, (_, i) => new Date().getFullYear() - MIN_AGE - i);
 
 const COUNTRIES = [
   "Algeria", "Angola", "Argentina", "Australia", "Austria",
