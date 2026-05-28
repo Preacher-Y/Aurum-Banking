@@ -60,7 +60,7 @@ export default function LoginPage() {
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data?.error ?? data?.message ?? "Verification failed.");
-      router.push(data.redirectTo ?? "/dashboard");
+      router.push(data.redirectTo ?? "/");
     } catch (err) {
       setError((err as Error)?.message ?? "An unexpected error occurred.");
       setOtp("");

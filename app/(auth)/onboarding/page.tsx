@@ -494,7 +494,7 @@ export default function OnboardingPage() {
       });
 
       if (!res.ok) throw new Error((await res.json()).error);
-      router.push("/dashboard");
+      router.push("/");
     } catch (err) {
       setError((err as Error).message);
     } finally {
