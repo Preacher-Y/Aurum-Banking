@@ -1,6 +1,6 @@
 "use client";
 
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
@@ -71,7 +71,6 @@ const NAV = [
 
 export default function Sidebar({ user }: { user: SidebarUser }) {
   const pathname = usePathname();
-  const router = useRouter();
   const [loggingOut, setLoggingOut] = useState(false);
 
   const initials = `${user.firstName[0] ?? ""}${user.lastName[0] ?? ""}`.toUpperCase();
@@ -81,8 +80,7 @@ export default function Sidebar({ user }: { user: SidebarUser }) {
     try {
       await fetch("/api/auth/logout", { method: "POST" });
     } finally {
-      router.push("/landing");
-      router.refresh();
+      window.location.href = "/landing";
     }
   }
 
