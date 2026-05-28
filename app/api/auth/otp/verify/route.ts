@@ -20,7 +20,7 @@ export async function POST(req: Request) {
 
     // Check onboarding status to decide where the client should redirect
     const userDoc = await databases.getDocument(DATABASE_ID, USER_COLLECTION_ID, userId);
-    const redirectTo = userDoc.onboardingComplete ? "/dashboard" : "/onboarding";
+    const redirectTo = userDoc.onboardingComplete ? "/" : "/onboarding";
 
     const response = NextResponse.json({ success: true, redirectTo });
 

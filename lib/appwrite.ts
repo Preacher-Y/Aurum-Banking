@@ -1,7 +1,8 @@
 import { Client, Account, Users, Databases } from "node-appwrite";
 import { cookies } from "next/headers";
+import { COOKIE_NAME } from "./constants";
 
-export const APPWRITE_COOKIE = process.env.APPWRITE_COOKIE_ID!;
+export const APPWRITE_COOKIE = COOKIE_NAME;
 export const DATABASE_ID = process.env.APPWRITE_DATABASE_ID!;
 export const USER_COLLECTION_ID = process.env.APPWRITE_USER_COLLECTION_ID!;
 
