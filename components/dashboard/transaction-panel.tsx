@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 type TxStatus = "completed" | "processing" | "declined";
 
@@ -57,6 +57,12 @@ function fmt(n: number) {
 export default function TransactionPanel({ accounts, transactions }: Props) {
   const [activeId, setActiveId] = useState(accounts[0]?.id ?? "");
   const rows = transactions[activeId] ?? [];
+
+  useEffect(() => {
+    if (!accounts.some((a) => a.id === activeId)) {
+      setActiveId(accounts[0]?.id ?? "");
+    }
+  }, [accounts, activeId]);
 
   return (
     <div>

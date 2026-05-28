@@ -1,6 +1,13 @@
 import { redirect } from "next/navigation";
+import { AppwriteException } from "node-appwrite";
 import { getSessionUser } from "@/lib/session";
 import Sidebar from "@/components/dashboard/sidebar";
+
+function isAuthError(err: unknown): boolean {
+  if (err instanceof AppwriteException) return err.code === 401;
+  if (err instanceof Error) return err.message === "No Appwrite session cookie found";
+  return false;
+}
 
 export default async function DashboardLayout({
   children,
@@ -10,8 +17,9 @@ export default async function DashboardLayout({
   let user;
   try {
     user = await getSessionUser();
-  } catch {
-    redirect("/landing");
+  } catch (err) {
+    if (isAuthError(err)) redirect("/landing");
+    throw err;
   }
 
   if (!user.onboardingComplete) {

@@ -73,14 +73,20 @@ export default function Sidebar({ user }: { user: SidebarUser }) {
   const pathname = usePathname();
   const [loggingOut, setLoggingOut] = useState(false);
 
-  const initials = `${user.firstName[0] ?? ""}${user.lastName[0] ?? ""}`.toUpperCase();
+  const initials =
+    ((user.firstName.charAt(0) || "") + (user.lastName.charAt(0) || "")).toUpperCase() || "AU";
 
   async function handleLogout() {
     setLoggingOut(true);
     try {
-      await fetch("/api/auth/logout", { method: "POST" });
-    } finally {
-      window.location.href = "/landing";
+      const res = await fetch("/api/auth/logout", { method: "POST" });
+      if (res.ok) {
+        window.location.href = "/landing";
+      } else {
+        setLoggingOut(false);
+      }
+    } catch {
+      setLoggingOut(false);
     }
   }
 

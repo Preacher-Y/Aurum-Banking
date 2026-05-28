@@ -211,7 +211,7 @@ export default async function DashboardPage() {
         <div className="flex flex-col items-center text-center">
           <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#a3853f] to-[#86642b] flex items-center justify-center mb-3">
             <span className="text-[18px] tracking-[1.5px] text-[#120e09] font-semibold">
-              {user.firstName[0]}{user.lastName[0]}
+              {user.firstName.charAt(0) || "A"}{user.lastName.charAt(0) || "U"}
             </span>
           </div>
           <p className="text-[16px] text-[#ede5d9]">{user.firstName} {user.lastName}</p>
